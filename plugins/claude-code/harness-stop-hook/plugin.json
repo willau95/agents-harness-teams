@@ -1,0 +1,13 @@
+{
+  "name": "harness-stop-hook",
+  "version": "0.1.0",
+  "description": "agents-harness-teams Stop Hook — intercepts Claude Code exit, verifies task completion, signals Watchdog daemon.",
+  "author": "agents-harness-teams",
+  "hooks": {
+    "Stop": "stop-hook.sh"
+  },
+  "permissions": {
+    "filesystem": ["read", "write"],
+    "network": false
+  }
+}
