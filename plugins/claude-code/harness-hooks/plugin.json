@@ -1,0 +1,9 @@
+{
+  "name": "harness-hooks",
+  "version": "0.1.0",
+  "description": "Session lifecycle hooks for agents-harness-teams. Auto-loads context at session start, saves session summary at stop.",
+  "hooks": {
+    "SessionStart": "session-start.sh",
+    "SessionStop": "session-stop.sh"
+  }
+}

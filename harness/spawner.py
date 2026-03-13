@@ -6,10 +6,9 @@ Session Isolation principle (Maestro-inspired):
 - Context pollution impossible: previous task's "fix Redis" memory cannot bleed into next task
 - Only the Goal Ancestry Chain JSON is injected — precisely scoped
 
-Model Tiering (wshobson-inspired):
-- opus: architecture / planning tasks (high quality, high cost)
-- sonnet: standard dev tasks (balanced quality/cost)
-- haiku: verification / simple tasks (fast, cheap)
+Model Tiering:
+- opus (claude-opus-4-6): architecture / planning / logic-check tasks (high quality)
+- sonnet (claude-sonnet-4-6): all development / execution tasks (balanced quality/cost)
 """
 import os
 import json
@@ -27,7 +26,17 @@ HARNESS_DIR = Path(".harness")
 MODEL_MAP = {
     "opus": "claude-opus-4-6",
     "sonnet": "claude-sonnet-4-6",
-    "haiku": "claude-haiku-4-5",
+}
+
+ROLE_MODELS = {
+    "initializer": "opus",    # Parses goal, generates Phase/Task tree
+    "planner": "opus",        # Writes Task Cards (Step 4)
+    "logic_checker": "opus",  # Deep logic check (Step 5)
+    "reviser": "sonnet",      # Fixes issues found in logic check (Step 6)
+    "worker": "sonnet",       # All development execution (Step 8)
+    "validator": "sonnet",    # Post-dev check (Step 9)
+    "reporter": "sonnet",     # REPORT-N.md generation (Step 9)
+    "orchestrator": "sonnet", # Dependency analysis, decision making
 }
 
 
